@@ -75,6 +75,19 @@ Copy code
         text-decoration: none;
         color: inherit;
     }
+    input[type="number"] {
+        width: 98%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+        border-color: #0000ff;
+        outline: none;
+    }
     </style>
 <body>
 
@@ -109,20 +122,28 @@ Copy code
 
 ?>
 
-  <form method="POST" action="crudaluno.php">
-  <label for="">Nome aluno</label>
-        <input type="text" name="nome" id="" value=<?php echo $nome?> >
-  <label for="">Idade</label>                                       
-        <input type="text" name="idade" id="" value=<?php echo $idade ?> >
-        <input type="hidden" name="id" id="" value=<?php echo $id ?> >
-  <label for="">Data de nascimento</label>     
-        <input type="text" name="datanascimento" id="" value=<?php echo $datanascimento?> >
-  <label for="">Turma</label>                                              
-        <input type="text" name="estatus" id="" value=<?php echo $estatus ?> >
-  <label for="">Endereço</label>                          
-        <input type="text" name="endereco" id="" value=<?php echo $endereco ?> >
+<form method="POST" action="crudaluno.php">
+    <label for="nome">Nome do aluno</label>
+    <input type="text" name="nome" required id="nome" value="<?php echo $nome ?>" >
+
+    <label for="idade">Idade</label>                                       
+    <input type="number" name="idade" id="idade" min="18" max="100" required value="<?php echo $idade ?>" >
+    <input type="hidden" name="id" value="<?php echo $id ?>" >
+
+    <label for="datanascimento">Data de nascimento</label>     
+    <input type="text" name="datanascimento" id="datanascimento" required value="<?php echo $datanascimento ?>" >
+
+    <label>Aluno está aprovado</label>
+    <label for="radiov">Verdadeiro</label>
+    <input type="radio" id="radiov" required name="estatus" value="AP" <?php echo ($estatus === 'AP') ? 'checked' : '' ?>>
         
-        <input type="submit" name="update" value="Alterar">
-  </form>
+    <label for="radioF">Falso</label>
+    <input type="radio" id="radioF" required name="estatus" value="RP" <?php echo ($estatus === 'RP') ? 'checked' : '' ?>>
+
+    <label for="endereco">Endereço</label>                          
+    <input type="text" name="endereco" id="endereco" required value="<?php echo $endereco ?>" >
+
+    <input type="submit" name="update" value="Alterar">
+</form>
 </body>
 </html>

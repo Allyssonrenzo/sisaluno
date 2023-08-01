@@ -87,24 +87,41 @@ Copy code
         text-decoration: none;
         color: inherit;
     }
+    input[type="number"] {
+        width: 98%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+        border-color: #0000ff;
+        outline: none;
+    }
 </style>
 </head>
 <body>
     <form method="GET" action="crudaluno.php">
-        <label for="nome">Nome aluno</label>
-        <input type="text" id="nome" name="nome">
+        <label for="nome">Nome do aluno</label>
+        <input type="text" required id="nome" name="nome">
 
     <label for="idade">Idade</label>
-    <input type="text" id="idade" name="idade">
+    <input type="number" id="idade" min="18" max="100" required name="idade">
 
-    <label for="turma">Estatus</label>
-    <input type="text" id="estatus" name="estatus">
+    <label for="estatus">Aluno está aprovado</label>
+        <label for="radiov">Verdadeiro</label>
+        <input type="radio" id="radiov" required  name="estatus" value="AP">
+        
+        <label for="radioF">Falso</label>
+        <input type="radio" id="radioF"required name="estatus" value="RP">
 
     <label for="endereco">Endereço</label>
-    <input type="text" id="endereco" name="endereco">
+    <input type="text" id="endereco" required name="endereco">
 
     <label for="datanascimento">Data de nascimento</label>
-    <input type="date" id="datanascimento" name="datanascimento">
+    <input type="date" id="datanascimento" required name="datanascimento">
 
     <input type="submit" name="cadastrar" value="Cadastrar">
 </form>

@@ -142,28 +142,45 @@ if(isset($_POST['update'])){
         }
 
 }        
+?>
 
-
-##Excluir
-if(isset($_GET['excluir'])){
+<?php
+if (isset($_GET['excluir'])) {
     $id = $_GET['id'];
-    $sql ="DELETE FROM `aluno` WHERE id={$id}";
-    $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   
-    $stmt = $conexao->prepare($sql);
-    $stmt->execute();
-
-    if($stmt->execute())
-        {
-            echo " <strong>OK!</strong> o aluno
-             $id foi excluido!!!"; 
-
-            echo " <button class='button'><a href='listaalunos.php'>voltar</a></button>";
-        }
-
-}
+    
+    
+    if (isset($_GET['confirmar']) && $_GET['confirmar'] === 'sim') {
+        // Código para a exclusão do professor
+        $sql = "DELETE FROM `aluno` WHERE id={$id}";
+        $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   
+        $stmt = $conexao->prepare($sql);
+        $stmt->execute();
 
         
+        echo "<strong>OK!</strong> O Aluno $id foi excluído!!!"; 
+        echo "<button class='button'><a href='listaalunos.php'>Voltar</a></button>";
+    } else {
+       
 ?>
- 
+<!DOCTYPE html>
+<html>
+<head>
+   
+    
+
+</head>
+<body>
+    <h2>Confirmar Exclusão</h2>
+    <p>Tem certeza que deseja excluir o Aluno?</p>
+
+    
+    <button class='button'><a href="crudaluno.php?excluir=1&id=<?php echo $nome ?>&confirmar=sim">Sim</a></button>
+    <button class='button'><a href="listaalunos.php">Não</a></button>
+</body>
+</html>
+<?php
+    }
+}
+?> 
 </body>
 
