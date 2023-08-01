@@ -41,32 +41,6 @@ Copy code
         border-color: #0000ff;
         outline: none;
     }
-    input[type="date"] {
-        width: 98%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #cccccc;
-        border-radius: 4px;
-        transition: border-color 0.3s ease;
-    }
-
-    input[type="date"]:focus {
-        border-color: #0000ff;
-        outline: none;
-    }
-    input[type="number"] {
-        width: 98%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #cccccc;
-        border-radius: 4px;
-        transition: border-color 0.3s ease;
-    }
-
-    input[type="number"]:focus {
-        border-color: #0000ff;
-        outline: none;
-    }
 
     input[type="submit"] {
         background-color: #0000ff;
@@ -91,6 +65,19 @@ Copy code
         border-radius: 4px;
         transition: background-color 0.3s ease;
     }
+    input[type="date"] {
+        width: 98%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="date"]:focus {
+        border-color: #0000ff;
+        outline: none;
+    }
 
     .button:hover {
         background-color: #333333;
@@ -100,35 +87,37 @@ Copy code
         text-decoration: none;
         color: inherit;
     }
+    input[type="number"] {
+        width: 98%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    input[type="number"]:focus {
+        border-color: #0000ff;
+        outline: none;
+    }
 </style>
 </head>
 <body>
-    <form method="GET" action="crudprof.php">
+    <form method="GET" action="cruddisciplina.php">
+   
+    <label for="nomedisciplina">Nome da Disciplina</label>
+    <input type="text" name=" nomedisciplina" required id=" nomedisciplina">
 
-    <label for="nome">Nome do Professor</label>
-    <input type="text" id="nome" required name="nome">
+    <label for="ch">Carga Horaria</label>                                       
+    <input type="number" name="ch" id="ch" min="20" max="80" required>
 
-    <label for="cpf">CPF</label>
-    <input type="text" id="cpf"  required name="cpf">
+    <label for="semestre">Semestre</label>     
+    <input type="text" name="semestre" id="semestre" required >
 
-    <label for="idade">Idade</label>
-    <input type="number" id="idade"  min="18" max="100" required name="idade">
 
-     
-        <label for="estatus">Professor está ativo</label>
-        <label for="radiov">Verdadeiro</label>
-        <input type="radio" id="radiov" required name="estatus" value="AT">
-        
-        <label for="radioF">Falso</label>
-        <input type="radio" id="radioF" required name="estatus" value="DT">
-       
+    <label for="idprofessor">ID Professor ministrante</label>                          
+    <input type="text" name="idprofessor" id="idprofessor" required >
 
-    <label for="endereco">Endereço</label>
-    <input type="text" id="endereco" required name="endereco">
-
-    <label for="datanascimento">Data de nascimento</label>
-    <input type="date" id="datanascimento" required name="datanascimento">
-    
 
     <input type="submit" name="cadastrar" value="Cadastrar">
 </form>

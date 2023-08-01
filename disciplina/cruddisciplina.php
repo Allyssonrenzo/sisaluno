@@ -84,16 +84,14 @@ require_once('../conexao.php');
 ##cadastrar
 if(isset($_GET['cadastrar'])){
         ##dados recebidos pelo metodo GET
-        $nome = $_GET["nome"];
-        $idade = $_GET["idade"];
-        $datanascimento = $_GET["datanascimento"];
-        $endereco = $_GET["endereco"];
-        $estatus = $_GET["estatus"];
-        $cpf = $_GET["cpf"];
-
+        $nomedisciplina = $_GET["nomedisciplina"];
+        $ch = $_GET["ch"];
+        $semestre = $_GET["semestre"];
+        $idprofessor = $_GET["idprofessor"];
+        
         ##codigo SQL
-        $sql = "INSERT INTO professor(nome,idade,datanascimento,endereco,estatus,cpf) 
-                VALUES('$nome','$idade','$datanascimento',' $endereco','$estatus','$cpf')";
+        $sql = "INSERT INTO disciplina(nomedisciplina,ch,semestre,idprofessor) 
+                VALUES('$nomedisciplina','$ch','$semestre','$idprofessor')";
 
         ##junta o codigo sql a conexao do banco
         $sqlcombanco = $conexao->prepare($sql);
@@ -101,8 +99,8 @@ if(isset($_GET['cadastrar'])){
         ##executa o sql no banco de dados
         if($sqlcombanco->execute())
             {
-                echo " <strong>OK!</strong> o professor
-                $nome foi Incluido com sucesso!!!"; 
+                echo " <strong>OK!</strong> a disciplina
+                $nomedisciplina foi Incluido com sucesso!!!"; 
                 echo " <button class='button'><a href='../index.php'>voltar</a></button>";
             }
         }
@@ -110,76 +108,70 @@ if(isset($_GET['cadastrar'])){
 if(isset($_POST['update'])){
 
     ##dados recebidos pelo metodo POST
-    $nome = $_POST["nome"];
-    $idade = $_POST["idade"];
+    $nomedisciplina = $_POST["nomedisciplina"];
+    $ch = $_POST["ch"];
     $id = $_POST["id"];
-    $datanascimento = $_POST["datanascimento"];
-    $endereco = $_POST["endereco"];
-    $estatus = $_POST["estatus"];
-    $cpf = $_POST["cpf"];
-   
+    $semestre = $_POST["semestre"];
+    $idprofessor = $_POST["idprofessor"];
       ##codigo sql
-    $sql = "UPDATE  professor SET nome= :nome, idade= :idade, datanascimento= :datanascimento, endereco= :endereco, estatus= :estatus, cpf= :cpf WHERE id= :id ";
+    $sql = "UPDATE  disciplina SET nomedisciplina= :nomedisciplina, ch= :ch, semestre= :semestre, idprofessor= :idprofessor WHERE id= :id ";
    
     ##junta o codigo sql a conexao do banco
     $stmt = $conexao->prepare($sql);
 
     ##diz o paramentro e o tipo  do paramentros
     $stmt->bindParam(':id',$id, PDO::PARAM_INT);
-    $stmt->bindParam(':nome',$nome, PDO::PARAM_STR);
-    $stmt->bindParam(':idade',$idade, PDO::PARAM_INT);
-    $stmt->bindParam(':datanascimento', $datanascimento, PDO::PARAM_STR);
-    $stmt->bindParam(':estatus',$estatus, PDO::PARAM_BOOL);
-    $stmt->bindParam(':endereco',$endereco, PDO::PARAM_STR);
-    $stmt->bindParam(':cpf',$cpf, PDO::PARAM_STR);
+    $stmt->bindParam(':nomedisciplina',$nomedisciplina, PDO::PARAM_STR);
+    $stmt->bindParam(':ch',$ch, PDO::PARAM_INT);
+    $stmt->bindParam(':semestre', $semestre, PDO::PARAM_STR);
+    $stmt->bindParam(':idprofessor',$idprofessor, PDO::PARAM_STR);
     $stmt->execute();
  
 
 
     if($stmt->execute())
         {
-            echo " <strong>OK!</strong> o professor
-             $nome foi Alterado com sucesso!!!"; 
+            echo " <strong>OK!</strong> a disciplina
+             $nomedisciplina foi Alterado com sucesso!!!"; 
 
-            echo " <button class='button'><a href='listaprof.php'>voltar</a></button>";
+            echo " <button class='button'><a href='listadisciplinas.php'>voltar</a></button>";
         }
 
 }        
 ?>
 
-
 <?php
 if (isset($_GET['excluir'])) {
     $id = $_GET['id'];
     
-   
+    
     if (isset($_GET['confirmar']) && $_GET['confirmar'] === 'sim') {
-        
-        $sql = "DELETE FROM `professor` WHERE id={$id}";
+        // Código para a exclusão do professor
+        $sql = "DELETE FROM `disciplina` WHERE id={$id}";
         $conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);   
         $stmt = $conexao->prepare($sql);
         $stmt->execute();
 
-      
-        echo "<strong>OK!</strong> O professor $id foi excluído!!!"; 
-        echo "<button class='button'><a href='listaprof.php'>Voltar</a></button>";
-    } else {
         
+        echo "<strong>OK!</strong> A disciplina $id foi excluída!!!"; 
+        echo "<button class='button'><a href='listadisciplinas.php'>Voltar</a></button>";
+    } else {
+       
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Confirmar Exclusão</title>
+   
     
 
 </head>
 <body>
     <h2>Confirmar Exclusão</h2>
-    <p>Tem certeza que deseja excluir o professor?</p>
+    <p>Tem certeza que deseja excluir a disciplina?</p>
 
     
-    <button class='button'><a href="crudprof.php?excluir=1&id=<?php echo $id ?>&confirmar=sim">Sim</a></button>
-    <button class='button'><a href="listaprof.php">Não</a></button>
+    <button class='button'><a href="cruddisciplina.php?excluir=1&id=<?php echo $id ?>&confirmar=sim">Sim</a></button>
+    <button class='button'><a href="listadisciplinas.php">Não</a></button>
 </body>
 </html>
 <?php

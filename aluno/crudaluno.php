@@ -174,7 +174,7 @@ if (isset($_GET['excluir'])) {
     <p>Tem certeza que deseja excluir o Aluno?</p>
 
     
-    <button class='button'><a href="crudaluno.php?excluir=1&id=<?php echo $nome ?>&confirmar=sim">Sim</a></button>
+    <button class='button'><a href="crudaluno.php?excluir=1&id=<?php echo $id ?>&confirmar=sim">Sim</a></button>
     <button class='button'><a href="listaalunos.php">Não</a></button>
 </body>
 </html>
